@@ -1,4 +1,3 @@
-import lxml
 from lxml import etree
 import git
 import json
@@ -21,6 +20,7 @@ repo_info = config['repository']
 
 repo_name_with_version = '%s-%s' % (repo_info['id'], repo_info['version'])
 build_repo_final_dir = os.path.join(build_repo_dir, repo_name_with_version)
+
 
 def init():
     if not os.path.isdir(plugins_dir):
@@ -116,7 +116,11 @@ def build_repo():
 
     etree.SubElement(requires_node, 'import', attrib=collections.OrderedDict([('addon', 'xbmc.addon'), ('version', '12.0.0')]))
 
-    extension_node = etree.SubElement(addon_xml_root, 'extension', attrib=collections.OrderedDict([('point', 'xbmc.addon.repository'), ('name', repo_info['name'])]))
+    extension_node = etree.SubElement(
+        addon_xml_root,
+        'extension',
+        attrib=collections.OrderedDict([('point', 'xbmc.addon.repository'), ('name', repo_info['name'])])
+    )
 
     etree.SubElement(extension_node, 'info', attrib={'compressed': 'true'}).text = '%s/Plugins/addons.xml' % host_url
     etree.SubElement(extension_node, 'checksum').text = '%s/Plugins/addons.xml.md5' % host_url
@@ -139,7 +143,7 @@ def build_repo():
     f = open(os.path.join(build_repo_final_dir, 'changelog.txt'), 'w')
     f.write(changelog)
     f.close()
-    
+
     shutil.make_archive(build_repo_final_dir, 'zip', build_repo_dir, repo_name_with_version)
     shutil.move('%s.zip' % build_repo_final_dir, build_repo_final_dir)
 
