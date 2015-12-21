@@ -24,3 +24,4 @@ Helper script to put together a Kodi repo for your plugins
 **TODO:**
 - Handle addon update
 - Handle separate kodi version for addons and repo structure
+- FTP upload
