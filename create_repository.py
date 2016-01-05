@@ -49,6 +49,7 @@ def build_plugins():
         else:
             repo = git.Repo(repo_dir)
 
+        repo.remote().fetch()
         repo.head.reset(index=True, working_tree=True)
 
         if not version:
@@ -60,6 +61,7 @@ def build_plugins():
             version = version[1:]
 
         name_with_version = '%s-%s' % (name, version)
+        print name_with_version
         build_repo_path = os.path.join(build_plugins_dir, name_with_version)
 
         shutil.copytree(repo_dir, build_repo_path, ignore=shutil.ignore_patterns('.git*'))
