@@ -1,3 +1,11 @@
+# repository.robloach
+
+[Kodi](http://kodi.tv) Addons Repository for Kodi Addons by [RobLoach](http://github.com/robloach). The repository itself built with [kodi-create-repo](https://github.com/virajkanwade/kodi-create-repo), by [Viraj Kanwade](https://github.com/virajkanwade).
+
+## Addons
+
+- [script.lutris](https://github.com/RobLoach/script.lutris)
+
 # kodi-create-repo
 Helper script to put together a Kodi repo for your plugins
 

@@ -1,0 +1,18 @@
+{
+    "repository": {
+        "id": "repository.robloach",
+        "name": "RobLoach's Addons",
+        "version": "0.1",
+        "provider-name": "RobLoach",
+        "summary": "RobLoach's Kodi Addons.",
+        "description": "Kodi Addons provided by Rob Loach. Includes just Lutris, for now.",
+        "icon": "icon.png"
+    },
+    "host_url": "http://robloach.github.io/repository.robloach",
+    "plugins": [
+        {
+            "name": "script.lutris",
+            "github_url": "https://github.com/RobLoach/script.lutris.git"
+        }
+    ]
+}
