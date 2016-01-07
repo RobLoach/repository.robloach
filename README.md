@@ -6,6 +6,10 @@
 
 - [script.lutris](https://github.com/RobLoach/script.lutris)
 
+## Build
+
+Follow the RUN instructions below, followed by running `./update-directory-index.sh`, and uploading `build` to the `gh-pages` branch.
+
 # kodi-create-repo
 Helper script to put together a Kodi repo for your plugins
 
