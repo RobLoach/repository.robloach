@@ -8,7 +8,9 @@
 
 ## Build
 
-Follow the RUN instructions below, followed by running `./update-directory-index.sh`, and uploading `build` to the `gh-pages` branch.
+``` bash
+python create_repository.py && ./update-directory-index.sh && ./push-gh-pages.sh build
+```
 
 # kodi-create-repo
 Helper script to put together a Kodi repo for your plugins
