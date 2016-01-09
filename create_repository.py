@@ -1,4 +1,6 @@
 from lxml import etree
+import click
+import datetime
 import git
 import json
 import shutil
@@ -149,7 +151,66 @@ def build_repo():
     shutil.make_archive(build_repo_final_dir, 'zip', build_repo_dir, repo_name_with_version)
     shutil.move('%s.zip' % build_repo_final_dir, build_repo_final_dir)
 
-if __name__ == "__main__":
+
+def build_gh_pages(root, current_dir):
+    cur_dir = os.path.join(root, current_dir)
+
+    html_root = etree.Element('html')
+    etree.SubElement(html_root, 'head')
+    body = etree.SubElement(html_root, 'body')
+
+    pth = os.path.relpath(cur_dir, root)
+    if pth == '.':
+        pth = ''
+
+    index_path = os.path.join('/', pth)
+
+    etree.SubElement(body, 'h1').text = 'Index of %s' % index_path
+    etree.SubElement(body, 'hr')
+
+    table = etree.SubElement(body, 'table', style='width: 50%; min-width: 800px;')
+
+    tr = etree.SubElement(table, 'tr')
+    td = etree.SubElement(tr, 'td')
+    item = '.' if index_path == '/' else '../'
+    etree.SubElement(td, 'a', href=item, style='width: 70%;').text = '../'
+    etree.SubElement(tr, 'td')
+    etree.SubElement(tr, 'td')
+
+    dir_items = os.listdir(cur_dir)
+    for item in dir_items:
+        item_path = os.path.join(cur_dir, item)
+        if os.path.isdir(item_path):
+            tr = etree.SubElement(table, 'tr')
+            td = etree.SubElement(tr, 'td')
+            etree.SubElement(td, 'a', href=item).text = '%s/' % item
+            etree.SubElement(tr, 'td').text = datetime.datetime.fromtimestamp(os.path.getmtime(item_path)).strftime('%d-%b-%Y %H:%M')
+            etree.SubElement(tr, 'td').text = '-'
+
+            build_gh_pages(root, os.path.join(current_dir, item))
+        else:
+            tr = etree.SubElement(table, 'tr')
+            td = etree.SubElement(tr, 'td')
+            etree.SubElement(td, 'a', href=item).text = item
+            etree.SubElement(tr, 'td').text = datetime.datetime.fromtimestamp(os.path.getmtime(item_path)).strftime('%d-%b-%Y %H:%M')
+            etree.SubElement(tr, 'td').text = str(os.path.getsize(item_path))
+
+    etree.SubElement(body, 'hr')
+
+    html_str = etree.tostring(html_root, pretty_print=True)
+    f = open(os.path.join(cur_dir, 'index.html'), 'w')
+    f.write(html_str)
+    f.close()
+
+
+@click.command()
+@click.option('--gh-pages', is_flag=True)
+def run(gh_pages):
     init()
     build_plugins()
     build_repo()
+    if gh_pages:
+        build_gh_pages(os.path.abspath(build_dir), '')
+
+if __name__ == "__main__":
+    run()

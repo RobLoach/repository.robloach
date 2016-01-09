@@ -24,6 +24,7 @@ Helper script to put together a Kodi repo for your plugins
 
 **RUN:**
 - ```python create_repository.py```
+- ```python create_repository.py --gh-pages``` *Will generate directory listing index pages for upload to github repo with gh-pages.*
 
 **OUTPUT:**
 - The repo structure files are stored in build directory
@@ -39,3 +40,4 @@ Helper script to put together a Kodi repo for your plugins
 - Handle addon update
 - Handle separate kodi version for addons and repo structure
 - FTP upload
+- Github pages upload
