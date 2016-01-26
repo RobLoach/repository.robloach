@@ -1,12 +1,12 @@
 <?xml version='1.0' encoding='UTF-8' standalone='yes'?>
-<addon id="repository.robloach" name="RobLoach's Addons" version="0.1" provider-name="RobLoach">
+<addon id="repository.robloach" name="RobLoach's Addons" version="0.2" provider-name="RobLoach">
   <requires>
     <import addon="xbmc.addon" version="12.0.0"/>
   </requires>
   <extension point="xbmc.addon.repository" name="RobLoach's Addons">
-    <info compressed="true">http://robloach.github.io/repository.robloach/Plugins/addons.xml</info>
-    <checksum>http://robloach.github.io/repository.robloach/Plugins/addons.xml.md5</checksum>
-    <datadir zip="true">http://robloach.github.io/repository.robloach/Plugins</datadir>
+    <info compressed="true">http://robloach.github.io/repository.robloach/addons.xml</info>
+    <checksum>http://robloach.github.io/repository.robloach/addons.xml.md5</checksum>
+    <datadir zip="true">http://robloach.github.io/repository.robloach</datadir>
     <hashes>true</hashes>
   </extension>
   <extension point="xbmc.addon.metadata">
